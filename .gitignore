@@ -1,0 +1,14 @@
+
+*.exe
+
+fort.10
+
+fort.57
+
+fort.9
+
+*.o
+
+*.mod
+
+*.gnu
