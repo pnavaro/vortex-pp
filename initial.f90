@@ -75,10 +75,7 @@ nbpart = 2 * nr
 
 !Calcul de la vitesse de propagation du systeme
 
-circ = 0.0
-do k = 1, nr
-  circ = circ + op(k)
-end do
+circ = sum(op(1:nr))
 
 write(*,*) ' Nombre total de particules =',nbpart
 
@@ -112,6 +109,7 @@ dr      = ray / ( nray + 0.5 )
 dray    = 0.5 * dr	!rayon de la section centrale
 surf    = pi * ray * ray 
 dteta   = 2.0 * pi / float( nsec)
+gamt    = gam0 / ( 1. - exp( -1.0 ) ) ! total strength of gaussian vortex
 
 k       = 1
 rf(  1) = 0.0
@@ -119,7 +117,6 @@ zf(  1) = 0.0
 ds(  1) = pi * dray * dray
 
 if ( gauss ) then
-   gamt = gam0 / ( 1. - exp( -1.0 ) )
    cir( 1) = gamt * ( 1.-exp(-(dray/ray)**2)) !gauss
 else
    cir( 1) = gam0 * ds( 1 ) / surf   !uniforme

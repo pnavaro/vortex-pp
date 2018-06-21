@@ -51,8 +51,7 @@ do istep = 1, nstep       !loop over time
    time = time + dt
    iplot = iplot + 1
 
-   if (mod(istep,imov) == 0) &
-     call gnuplot_output(istep, iplot, time, xp, yp, op, nbpart, nstep)
+!   call gnuplot_output(istep, iplot, time, xp, yp, op, nbpart, nstep)
    write(*,"(i5,1x,1g12.3)")istep, time
 
 end do      !next time step
