@@ -37,7 +37,7 @@ read(10,donnees)
 close(10)
 
 pi = 4. * atan(1.)
-r0 = 0.6 
+r0 = 0.5 
 u0 = amach 
 
 gam0   = u0 * 2.0 * pi / 0.7 * r0	!gaussienne
@@ -123,8 +123,6 @@ else
 end if
 sgam    = cir( 1 )
 
-write(57,1000) rf(1), zf(1), cir(1), ds(1)
-
 r1    = dray
 s1    = pi * r1**2
 nsec0 = nsec
@@ -167,19 +165,13 @@ do i = 1, nray
 
       sgam     = sgam + cir( k )
 
-      write(57,1000) rf(k), zf(k), cir(k), ds(k)
-
     end do
 
     r1  = r2 
 
     kd = k - nsec + 1 
-    write(57,1000) rf( kd ), zf( kd ), cir( kd ), ds(kd)
-    write(57,1000) 
 
 end do
-
-close(57)
 
 nr = k
 

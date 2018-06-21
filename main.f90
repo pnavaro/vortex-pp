@@ -9,7 +9,7 @@ use initial, only: lecture
 implicit none
 
 integer, parameter :: idm = 100000
-integer :: nbpart, i, j, k, n, iplot, istep, imov, nstep
+integer :: nbpart, i, j, k, n, istep, imov, nstep
 real :: xp(idm), yp(idm), op(idm), up(idm), vp(idm)
 real, dimension(64,64) :: w
 real :: time
@@ -22,18 +22,17 @@ real :: dt
 call cpu_time(tcpu)
 t0 = getRealTimer()
 call lecture( nstep, imov, xp, yp, op, delta, idm, dt, nbpart )
-do k = 1, nbpart
-   write(9,*) xp(k), yp(k), op(k)
-end do
 call calcul_w(xp, yp, op, w, nbpart)  
+
+open(10, file="initial_w.dat")
 do i = 1, 64
 do j = 1, 64
    write(10,*) i, j, w(i,j)
 end do
 write(10,*) 
 end do
+close(10)
 
-iplot   = 0
 time = 0.0
 
 do istep = 1, nstep       !loop over time
@@ -41,17 +40,11 @@ do istep = 1, nstep       !loop over time
    call vitesse(nbpart, xp, yp, op, up, vp, delta)
    call deplace(nbpart, xp, yp, up, vp, dt)
 !   call calcul_w(xp, yp, op, w, nbpart)  
-!   do i = 1, 64
-!   do j = 1, 64
-!      write(10,*) i, j, w(i,j)
-!   end do
-!      write(10,*) 
-!   end do
   
    time = time + dt
-   iplot = iplot + 1
 
-!   call gnuplot_output(istep, iplot, time, xp, yp, op, nbpart, nstep)
+   if ( mod(istep, imov) == 0) &
+   call gnuplot_output(istep, time, xp, yp, op, nbpart, nstep)
    write(*,"(i5,1x,1g12.3)")istep, time
 
 end do      !next time step

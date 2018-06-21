@@ -11,9 +11,9 @@ integer :: dbfile
 
 contains
 
-subroutine gnuplot_output( istep, iplot, time, xp, yp, op, nbpart, nstep )
+subroutine gnuplot_output( istep, time, xp, yp, op, nbpart, nstep )
 
-integer :: nbpart, nstep, iplot, istep
+integer :: nbpart, nstep, istep
 real :: xp(*), yp(*), op(*)
 character(len=40):: nom
 integer :: ifich, ifich1, ifich2
@@ -21,6 +21,7 @@ real :: time
 integer :: kk0, kk1, kk2, kk3, kk4
 character(len=04):: fin
 character(len=01):: aa,bb,cc,dd
+integer, save :: iplot = 1
 
 ifich = 80
 
@@ -54,6 +55,8 @@ end do
 close(ifich )
 
 1000 format( "plo '",a,"' w p ")
+
+iplot = iplot + 1
 
 end subroutine gnuplot_output
 

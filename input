@@ -1,8 +1,8 @@
 $donnees
-nstep = 5000	!nombre de pas de temps
-dt    = 0.01	!pas de temps
-imov  = 10	      !frequence des sorties graphiques
-amach = 0.56	!nombre de mach pour les deux vortex
-nray  = 20	      !nombre de particules sur un rayon du vortex
-delta = 0.01	!parametre de regularisation
+nstep = 5000	!time steps
+dt    = 0.01	!time step
+imov  = 10	!diagnostics period
+amach = 0.56	!Mach number 
+nray  = 20	!Number of particles along the vortex ray
+delta = 0.01	!Kernel parameter
 $end

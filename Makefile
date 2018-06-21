@@ -9,12 +9,9 @@ FC = gfortran
 OPTS = -O4 -p -W
 FFLAGS = $(OPTS) 
 
-all : new.exe old.exe
+all : vpp.exe 
 
-new.exe: $(OBJS) main_new.F90
-	$(FC) $(FFLAGS) $^ -o $@ $(LDFLAGS)
-
-old.exe: $(OBJS) main_old.F90
+vpp.exe: $(OBJS) main.F90
 	$(FC) $(FFLAGS) $^ -o $@ $(LDFLAGS)
 
 run: $(PROG)
@@ -22,8 +19,6 @@ run: $(PROG)
 
 .SUFFIXES: $(SUFFIXES) .o .f90 .mod .f
 
-.f.o:
-	$(FC) $(FFLAGS) -c $<
 .f90.o:
 	$(FC) $(FFLAGS) -c $<
 .mod.o:
@@ -36,4 +31,3 @@ sorties.o: sorties.f90
 clean:
 	rm -f $(PROG) *.o *.mod fort.* data/* *.dx *.gnu
 	rm -f *.exe *.so *.so.* *.cu *.cu.* *.linkinfo *.hmd
-
